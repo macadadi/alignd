@@ -104,6 +104,19 @@ describe('ProvidersListView', () => {
     expect(wrapper.text()).toContain('Clinic Alpha')
   })
 
+  it('restores filters from URL query on mount', async () => {
+    await router.push('/providers?search=Alpha&type=GP')
+    const wrapper = mount(ProvidersListView, {
+      global: { plugins: [createPinia(), router] },
+    })
+    await nextTick()
+    await new Promise((r) => setTimeout(r, 0))
+    const searchInput = wrapper.find<HTMLInputElement>('#provider-search')
+    expect((searchInput.element as HTMLInputElement).value).toBe('Alpha')
+    const dropdown = wrapper.findComponent({ name: 'Select' })
+    expect(dropdown.props('modelValue')).toBe('GP')
+  })
+
   it('navigates to provider on row click', async () => {
     const pushSpy = vi.spyOn(router, 'push')
     const wrapper = mount(ProvidersListView, {
@@ -113,6 +126,8 @@ describe('ProvidersListView', () => {
     await new Promise((r) => setTimeout(r, 0))
     const row = wrapper.find('.p-datatable-tbody tr')
     if (row.exists()) await row.trigger('click')
-    expect(pushSpy).toHaveBeenCalledWith('/providers/prov-1')
+    expect(pushSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ path: '/providers/prov-1', state: expect.any(Object) }),
+    )
   })
 })

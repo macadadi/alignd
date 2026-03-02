@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import { createRouter, createMemoryHistory } from 'vue-router'
 import { setActivePinia, createPinia } from 'pinia'
+import ToastService from 'primevue/toastservice'
 import PatientDetailView from './PatientDetailView.vue'
 import { usePatientsStore } from '../stores/patients'
 import * as patientsApi from '../api/patients'
@@ -65,7 +66,7 @@ function mountView(
 ) {
   return mount(PatientDetailView, {
     global: {
-      plugins: [piniaInstance ?? createPinia(), router],
+      plugins: [piniaInstance ?? createPinia(), router, ToastService],
       stubs: {
         Button: stubButton,
         StateLoading: stubStateLoading,
@@ -183,7 +184,7 @@ describe('PatientDetailView', () => {
     const pushSpy = vi.spyOn(router, 'push')
     const backBtn = wrapper.findAll('button').find((b) => b.text().includes('Back to patients'))
     await backBtn?.trigger('click')
-    expect(pushSpy).toHaveBeenCalledWith('/patients')
+    expect(pushSpy).toHaveBeenCalledWith(expect.objectContaining({ path: '/patients' }))
   })
 
   it('opens link modal and persists on confirm', async () => {

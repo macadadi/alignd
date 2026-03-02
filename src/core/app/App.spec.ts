@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createRouter, createMemoryHistory } from 'vue-router'
+import { createPinia } from 'pinia'
+import ToastService from 'primevue/toastservice'
 import App from './App.vue'
 
 const router = createRouter({
@@ -15,7 +17,11 @@ const router = createRouter({
 describe('App', () => {
   it('renders header and nav', async () => {
     await router.push('/')
-    const wrapper = mount(App, { global: { plugins: [router] } })
+    const wrapper = mount(App, {
+      global: {
+        plugins: [createPinia(), router, ToastService],
+      },
+    })
     expect(wrapper.text()).toContain('Healthcare Dashboard')
     expect(wrapper.find('nav').exists()).toBe(true)
     expect(wrapper.findAll('a').length).toBeGreaterThanOrEqual(2)

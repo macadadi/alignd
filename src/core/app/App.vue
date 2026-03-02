@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import Toast from 'primevue/toast'
+import Breadcrumbs from '@/shared/ui/Breadcrumbs.vue'
 </script>
 
 <template>
   <div class="app-shell">
+    <Toast position="top-right" />
     <header class="topbar">
       <div>
         <h1>Healthcare Dashboard</h1>
@@ -15,6 +18,7 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
     </header>
     <main>
+      <Breadcrumbs />
       <RouterView />
     </main>
   </div>

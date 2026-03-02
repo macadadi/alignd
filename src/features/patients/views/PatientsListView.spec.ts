@@ -99,6 +99,22 @@ describe('PatientsListView', () => {
     expect(wrapper.text()).toContain('Alice Smith')
   })
 
+  it('restores filters from URL query on mount', async () => {
+    await router.push('/patients?search=Alice&programmeType=TypeA&programmePhase=Phase1')
+    const wrapper = mount(PatientsListView, {
+      global: { plugins: [createPinia(), router] },
+    })
+    await nextTick()
+    await new Promise((r) => setTimeout(r, 0))
+    const searchInput = wrapper.find<HTMLInputElement>('#patient-search')
+    expect((searchInput.element as HTMLInputElement).value).toBe('Alice')
+    const dropdowns = wrapper.findAllComponents({ name: 'Select' })
+    const typeDropdown = dropdowns.find((d) => d.props('placeholder')?.includes('programme type'))
+    const phaseDropdown = dropdowns.find((d) => d.props('placeholder')?.includes('programme phase'))
+    expect(typeDropdown?.props('modelValue')).toBe('TypeA')
+    expect(phaseDropdown?.props('modelValue')).toBe('Phase1')
+  })
+
   it('navigates to patient on row click', async () => {
     const pushSpy = vi.spyOn(router, 'push')
     const wrapper = mount(PatientsListView, {
@@ -108,6 +124,8 @@ describe('PatientsListView', () => {
     await new Promise((r) => setTimeout(r, 0))
     const row = wrapper.find('.p-datatable-tbody tr')
     if (row.exists()) await row.trigger('click')
-    expect(pushSpy).toHaveBeenCalledWith('/patients/p1')
+    expect(pushSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ path: '/patients/p1', state: expect.any(Object) }),
+    )
   })
 })

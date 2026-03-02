@@ -6,6 +6,7 @@ import Badge from '@/shared/ui/Badge.vue'
 import StateLoading from '@/shared/ui/StateLoading.vue'
 import StateError from '@/shared/ui/StateError.vue'
 import StateEmpty from '@/shared/ui/StateEmpty.vue'
+import { useToast } from 'primevue/usetoast'
 import { persistProviderLinks } from '../api/patients'
 import { usePatientsStore } from '../stores/patients'
 import { useProvidersStore } from '@/features/providers/stores/providers'
@@ -39,6 +40,7 @@ const sortedClinicalSummary = computed(() => {
   )
 })
 
+const toast = useToast()
 const isSubmitting = ref(false)
 const mutationError = ref('')
 
@@ -49,6 +51,20 @@ function openModal(): void {
 
 function closeModal(): void {
   linkModalOpen.value = false
+}
+
+function goBackToPatients(): void {
+  // Prefer router.back() so we return to the list URL with its query params (filters).
+  // Fallback to push when opened directly (e.g. bookmark) - history.state may have fromListQuery.
+  const fromListQuery = (history.state as { fromListQuery?: Record<string, string> } | null)
+    ?.fromListQuery
+  if (fromListQuery) {
+    router.push({ path: '/patients', query: fromListQuery })
+  } else if (window.history.length > 1) {
+    router.back()
+  } else {
+    router.push({ path: '/patients' })
+  }
 }
 
 function formatDate(date: string): string {
@@ -70,9 +86,26 @@ async function onConfirm(providerIds: string[]): Promise<void> {
   try {
     await persistProviderLinks(patient.value.id, optimistic.addedIds)
     closeModal()
+    const count = optimistic.addedIds.length
+    toast.add({
+      severity: 'success',
+      summary: 'Providers linked',
+      detail:
+        count === 1
+          ? '1 provider linked successfully.'
+          : `${count} providers linked successfully.`,
+      life: 5000,
+    })
   } catch (error) {
     optimistic.rollback()
-    mutationError.value = error instanceof Error ? error.message : 'Failed to link providers.'
+    const message = error instanceof Error ? error.message : 'Failed to link providers.'
+    mutationError.value = message
+    toast.add({
+      severity: 'error',
+      summary: 'Failed to link providers',
+      detail: message,
+      life: 7000,
+    })
   } finally {
     isSubmitting.value = false
   }
@@ -88,11 +121,20 @@ onMounted(async () => {
     <StateLoading v-if="patientsStore.isLoading || providersStore.isLoading" />
     <StateError
       v-else-if="Boolean(patientsStore.error) || Boolean(providersStore.error)"
-      @retry="() => { patientsStore.load(true); providersStore.load(true) }"
+      @retry="
+        () => {
+          patientsStore.load(true)
+          providersStore.load(true)
+        }
+      "
     />
     <StateEmpty v-else-if="!patient">
       <p class="not-found">Patient was not found.</p>
-      <Button label="Back to patients" severity="secondary" @click="router.push('/patients')" />
+      <Button
+        label="Back to patients"
+        severity="secondary"
+        @click="goBackToPatients"
+      />
     </StateEmpty>
 
     <template v-else>
@@ -101,7 +143,14 @@ onMounted(async () => {
           <h2>{{ patient.fullName }}</h2>
           <p>{{ patient.id }}</p>
         </div>
-        <Button label="Link Provider" @click="openModal" />
+        <div class="view-header__actions">
+          <Button
+            label="Back to patients"
+            severity="secondary"
+            @click="goBackToPatients"
+          />
+          <Button label="Link Provider" @click="openModal" />
+        </div>
       </header>
 
       <article class="panel">
@@ -200,6 +249,12 @@ onMounted(async () => {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.view-header__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 640px) {

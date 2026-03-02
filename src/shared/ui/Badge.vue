@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
+import type { RouteLocationRaw } from 'vue-router'
 
 defineOptions({ name: 'AppBadge' })
-import { RouterLink } from 'vue-router'
 
 const props = withDefaults(
   defineProps<{
     /** When set, renders as RouterLink instead of span */
-    to?: string
+    to?: RouteLocationRaw
   }>(),
   { to: undefined },
 )

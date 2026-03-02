@@ -24,6 +24,18 @@ const linkedPatients = computed(() => {
   )
 })
 
+function goBackToProviders(): void {
+  const fromListQuery = (history.state as { fromListQuery?: Record<string, string> } | null)
+    ?.fromListQuery
+  if (fromListQuery) {
+    router.push({ path: '/providers', query: fromListQuery })
+  } else if (window.history.length > 1) {
+    router.back()
+  } else {
+    router.push({ path: '/providers' })
+  }
+}
+
 function navigateToPatient(patientId: string): void {
   router.push(`/patients/${patientId}`)
 }
@@ -42,7 +54,11 @@ onMounted(async () => {
     />
     <StateEmpty v-else-if="!provider">
       <p class="not-found">Provider was not found.</p>
-      <Button label="Back to providers" severity="secondary" @click="router.push('/providers')" />
+      <Button
+        label="Back to providers"
+        severity="secondary"
+        @click="goBackToProviders"
+      />
     </StateEmpty>
 
     <template v-else>
@@ -51,7 +67,11 @@ onMounted(async () => {
           <h2>{{ provider.name }}</h2>
           <p>{{ provider.id }}</p>
         </div>
-        <Button label="Back to providers" severity="secondary" @click="router.push('/providers')" />
+        <Button
+          label="Back to providers"
+          severity="secondary"
+          @click="goBackToProviders"
+        />
       </header>
 
       <article class="panel">

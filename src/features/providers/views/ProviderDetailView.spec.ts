@@ -119,7 +119,7 @@ describe('ProviderDetailView', () => {
     const pushSpy = vi.spyOn(router, 'push')
     const backBtn = wrapper.findAll('button').find((b) => b.text().includes('Back to providers'))
     await backBtn?.trigger('click')
-    expect(pushSpy).toHaveBeenCalledWith('/providers')
+    expect(pushSpy).toHaveBeenCalledWith(expect.objectContaining({ path: '/providers' }))
   })
 
   it('navigates to /providers when Back clicked (provider loaded)', async () => {
@@ -129,7 +129,7 @@ describe('ProviderDetailView', () => {
     await new Promise((r) => setTimeout(r, 0))
     const backBtn = wrapper.findAll('button').find((b) => b.text().includes('Back to providers'))
     await backBtn?.trigger('click')
-    expect(pushSpy).toHaveBeenCalledWith('/providers')
+    expect(pushSpy).toHaveBeenCalledWith(expect.objectContaining({ path: '/providers' }))
   })
 
   it('shows linked patients and navigates to patient on click', async () => {

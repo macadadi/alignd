@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
@@ -12,11 +12,16 @@ import { useProvidersStore } from '../stores/providers'
 import { usePatientsStore } from '@/features/patients/stores/patients'
 import { buildProviderPatientCountMap, filterProvidersBySearch, filterProvidersByType } from '@/shared/utils/filters'
 
+const route = useRoute()
 const router = useRouter()
 const providersStore = useProvidersStore()
 const patientsStore = usePatientsStore()
-const { searchQuery, debouncedSearch, setSearch } = useSearchInput(250)
-const selectedProviderType = ref('')
+
+const querySearch = () => String(route.query.search ?? '')
+const queryType = () => String(route.query.type ?? '')
+
+const { searchQuery, debouncedSearch, setSearch } = useSearchInput(250, querySearch())
+const selectedProviderType = ref(queryType())
 
 const providerTypes = computed(() =>
   Array.from(new Set(providersStore.items.map((provider) => provider.type))).sort(),
@@ -55,8 +60,32 @@ const isNoResults = computed(
   () => filteredProviders.value.length === 0 && providersStore.items.length > 0,
 )
 
+function buildListQuery(): Record<string, string> {
+  const q: Record<string, string> = {}
+  if (searchQuery.value) q.search = searchQuery.value
+  if (selectedProviderType.value) q.type = selectedProviderType.value
+  return q
+}
+
+function syncFiltersToUrl(): void {
+  const query = buildListQuery()
+  router.replace({ path: '/providers', query: Object.keys(query).length > 0 ? query : undefined })
+}
+
+let searchSyncTimeout: ReturnType<typeof setTimeout> | null = null
+function debouncedSyncSearch(): void {
+  if (searchSyncTimeout) clearTimeout(searchSyncTimeout)
+  searchSyncTimeout = setTimeout(() => {
+    syncFiltersToUrl()
+    searchSyncTimeout = null
+  }, 300)
+}
+
+watch(searchQuery, debouncedSyncSearch)
+watch(selectedProviderType, syncFiltersToUrl)
+
 function onRowClick(event: { data: ProviderRow }): void {
-  router.push(`/providers/${event.data.id}`)
+  router.push({ path: `/providers/${event.data.id}`, state: { fromListQuery: buildListQuery() } })
 }
 
 onMounted(async () => {

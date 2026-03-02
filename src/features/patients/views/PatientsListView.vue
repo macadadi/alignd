@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
@@ -12,11 +12,17 @@ import { usePatientsStore } from '../stores/patients'
 import { filterPatientsByProgramme, filterPatientsBySearch } from '@/shared/utils/filters'
 import type { PatientAddress } from '@/shared/types/domain'
 
+const route = useRoute()
 const router = useRouter()
 const patientsStore = usePatientsStore()
-const { searchQuery, debouncedSearch, setSearch } = useSearchInput(250)
-const selectedProgrammeType = ref('')
-const selectedProgrammePhase = ref('')
+
+const querySearch = () => String(route.query.search ?? '')
+const queryProgrammeType = () => String(route.query.programmeType ?? '')
+const queryProgrammePhase = () => String(route.query.programmePhase ?? '')
+
+const { searchQuery, debouncedSearch, setSearch } = useSearchInput(250, querySearch())
+const selectedProgrammeType = ref(queryProgrammeType())
+const selectedProgrammePhase = ref(queryProgrammePhase())
 
 const programmeTypes = computed(() =>
   Array.from(new Set(patientsStore.items.map((patient) => patient.programmeType))).sort(),
@@ -70,8 +76,38 @@ const isNoResults = computed(
   () => filteredPatients.value.length === 0 && patientsStore.items.length > 0,
 )
 
+function buildListQuery() {
+  const q: Record<string, string> = {}
+  if (searchQuery.value) q.search = searchQuery.value
+  if (selectedProgrammeType.value) q.programmeType = selectedProgrammeType.value
+  if (selectedProgrammePhase.value) q.programmePhase = selectedProgrammePhase.value
+  return q
+}
+
+function syncFiltersToUrl(): void {
+  const query = buildListQuery()
+  router.replace({ path: '/patients', query: Object.keys(query).length > 0 ? query : undefined })
+}
+
+let searchSyncTimeout: ReturnType<typeof setTimeout> | null = null
+function debouncedSyncSearch(): void {
+  if (searchSyncTimeout) clearTimeout(searchSyncTimeout)
+  searchSyncTimeout = setTimeout(() => {
+    syncFiltersToUrl()
+    searchSyncTimeout = null
+  }, 300)
+}
+
+watch(searchQuery, debouncedSyncSearch)
+watch(selectedProgrammeType, syncFiltersToUrl)
+watch(selectedProgrammePhase, syncFiltersToUrl)
+
 function navigateToPatient(patientId: string): void {
-  router.push(`/patients/${patientId}`)
+  router.push({ path: `/patients/${patientId}`, state: { fromListQuery: buildListQuery() } })
+}
+
+function patientDetailTo(patientId: string) {
+  return { path: `/patients/${patientId}`, state: { fromListQuery: buildListQuery() } }
 }
 
 function onRowClick(event: { data: PatientRow }): void {
@@ -139,7 +175,7 @@ onMounted(async () => {
       <Column field="programmePhase" header="Programme Phase" />
       <Column field="providerCount" header="Provider Count">
         <template #body="{ data }">
-          <Badge :to="`/patients/${data.id}`" @click.stop>
+          <Badge :to="patientDetailTo(data.id)" @click.stop>
             {{ data.providerCount }} linked providers
           </Badge>
         </template>
