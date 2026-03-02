@@ -7,6 +7,12 @@
   font-weight: normal;
 }
 
+@media (max-width: 640px) {
+  #app {
+    padding: 0.75rem;
+  }
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -17,4 +23,35 @@ a {
   a:hover {
     background: color-mix(in srgb, var(--color-background-mute) 65%, transparent);
   }
+}
+
+/* Shared state component layout (loading, error, empty, no-results) */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.state__text {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+@media (max-width: 640px) {
+  .state {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Shared form control layout (search, select wrappers) */
+.control-group,
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
 }

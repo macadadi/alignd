@@ -7,4 +7,3 @@ export const apiClient = axios.create({
 export async function simulateLatency(ms = 450): Promise<void> {
   await new Promise((resolve) => setTimeout(resolve, ms))
 }
-

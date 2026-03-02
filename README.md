@@ -6,7 +6,7 @@ Production-focused Vue 3 + TypeScript dashboard for patient and provider workflo
 
 - **Single data layer:** Pinia domain stores fetch, own, and mutate `patients` and `providers`.
 - **Local UI state:** search inputs and modal selection state live in their corresponding views/components.
-- **Data source:** all mock data comes from `api-responses/patients.json` and `api-responses/providers.json` via service adapters.
+- **Data source:** all mock data comes from `public/api-responses/patients.json` and `public/api-responses/providers.json` via service adapters (served at `/api-responses/` in dev).
 
 ## Why This Architecture
 
@@ -42,17 +42,20 @@ Production-focused Vue 3 + TypeScript dashboard for patient and provider workflo
 
 ```text
 src/
-  components/
-    patients/         # Link-provider modal
-    state/            # loading/error/empty/no-results states
-  composables/        # Reusable client-side helpers (debounce)
-  router/             # Route definitions
-  services/api/       # API client, adapters, fetch services
-  stores/             # Pinia domain stores
-  types/              # DTO/domain contracts
-  utils/              # Typed selectors
-  views/              # Patients list/detail, providers list
-api-responses/        # JSON mock responses
+  core/               # App shell, router
+  shared/             # Cross-cutting UI, composables, utils, types
+    ui/               # State loading/error/empty/no-results
+    composables/      # Reusable helpers (debounce)
+    stores/           # createLoadable factory
+    types/            # DTO/domain contracts
+    utils/            # Filters (patient/provider)
+  features/
+    patients/         # API, components, stores, views
+    providers/        # API, stores, views
+  services/api/       # HTTP client
+  assets/
+public/
+  api-responses/      # JSON mock responses (served at /api-responses/)
 ```
 
 ## Getting Started

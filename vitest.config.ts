@@ -7,7 +7,7 @@ export default mergeConfig(
   defineConfig({
     test: {
       environment: 'jsdom',
-      setupFiles: ['src/test-utils/setup.ts'],
+      setupFiles: ['src/shared/test-utils/setup.ts'],
       exclude: [...configDefaults.exclude, 'e2e/**'],
       root: fileURLToPath(new URL('./', import.meta.url)),
       coverage: {
@@ -16,11 +16,10 @@ export default mergeConfig(
         include: ['src/**/*.{ts,vue}'],
         exclude: [
           'src/main.ts',
-          'src/types/**',
-          'src/router/**',
-          'src/test-utils/**',
+          'src/shared/types/**',
+          'src/core/router/**',
+          'src/shared/test-utils/**',
           'src/services/api/client.ts',
-          'src/services/api/index.ts',
           '**/*.d.ts',
         ],
         thresholds: {
