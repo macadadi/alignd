@@ -3,7 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select'
 import StateLoading from '@/components/state/StateLoading.vue'
 import StateError from '@/components/state/StateError.vue'
 import StateEmpty from '@/components/state/StateEmpty.vue'
@@ -82,7 +82,7 @@ onMounted(async () => {
         </span>
         <label class="select-wrapper">
           <span>Provider Type</span>
-          <Dropdown
+          <Select
             v-model="selectedProviderType"
             :options="providerTypes"
             placeholder="All provider types"

@@ -1,8 +1,5 @@
 import { onScopeDispose, ref, watch } from 'vue'
 
-/**
- * Debounces a string value. Updates debouncedRef after `ms` of no changes.
- */
 export function useDebounce(source: () => string, ms: number) {
   const debounced = ref(source())
   let timeoutId: ReturnType<typeof setTimeout> | null = null

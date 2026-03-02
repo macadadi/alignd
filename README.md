@@ -44,8 +44,6 @@ Production-focused Vue 3 + TypeScript dashboard for patient and provider workflo
 src/
   components/
     patients/         # Link-provider modal
-    primitives/       # AppButton/AppInput/AppModal
-    shared/           # Virtual list
     state/            # loading/error/empty/no-results states
   composables/        # Reusable client-side helpers (debounce)
   router/             # Route definitions

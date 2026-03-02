@@ -4,7 +4,7 @@ import { RouterLink, useRouter } from 'vue-router'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select'
 import StateLoading from '@/components/state/StateLoading.vue'
 import StateError from '@/components/state/StateError.vue'
 import StateEmpty from '@/components/state/StateEmpty.vue'
@@ -115,7 +115,7 @@ onMounted(async () => {
         </span>
         <label class="select-wrapper">
           <span>Programme Type</span>
-          <Dropdown
+          <Select
             v-model="selectedProgrammeType"
             :options="programmeTypes"
             placeholder="All programme types"
@@ -124,7 +124,7 @@ onMounted(async () => {
         </label>
         <label class="select-wrapper">
           <span>Programme Phase</span>
-          <Dropdown
+          <Select
             v-model="selectedProgrammePhase"
             :options="programmePhases"
             placeholder="All programme phases"
