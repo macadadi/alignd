@@ -141,9 +141,9 @@ describe('LinkProviderModal', () => {
     input.value = 'test'
     input!.dispatchEvent(new Event('input'))
     await nextTick()
-    await (wrapper.vm as unknown as { setProps: (props: ModalProps) => void }).setProps({ open: false })
+    await wrapper.setProps({ open: false })
     await nextTick()
-    await (wrapper.vm as unknown as { setProps: (props: ModalProps) => void }).setProps({ open: true })
+    await wrapper.setProps({ open: true })
     await waitForModal()
     const newInput = document.getElementById('link-provider-search') as HTMLInputElement
     expect(newInput?.value).toBe('')

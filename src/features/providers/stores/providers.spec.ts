@@ -47,4 +47,20 @@ describe('useProvidersStore', () => {
 
     expect(fetchProviders).toHaveBeenCalledTimes(2)
   })
+
+  it('getById returns provider when found', async () => {
+    const store = useProvidersStore()
+    await store.load()
+
+    const provider = store.getById('prov-1')
+    expect(provider).toBeDefined()
+    expect(provider?.name).toBe('Clinic Alpha')
+  })
+
+  it('getById returns undefined when not found', async () => {
+    const store = useProvidersStore()
+    await store.load()
+
+    expect(store.getById('unknown')).toBeUndefined()
+  })
 })

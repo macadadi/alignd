@@ -19,11 +19,16 @@ export const useProvidersStore = defineStore('providers', () => {
     }, force)
   }
 
+  function getById(id: string): Provider | undefined {
+    return items.value.find((provider) => provider.id === id)
+  }
+
   return {
     items,
     isLoading: loadable.isLoading,
     error: loadable.error,
     hasLoaded: loadable.hasLoaded,
     load,
+    getById,
   }
 })

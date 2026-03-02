@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import InputText from 'primevue/inputtext'
@@ -11,6 +12,7 @@ import { useProvidersStore } from '../stores/providers'
 import { usePatientsStore } from '@/features/patients/stores/patients'
 import { buildProviderPatientCountMap, filterProvidersBySearch, filterProvidersByType } from '@/shared/utils/filters'
 
+const router = useRouter()
 const providersStore = useProvidersStore()
 const patientsStore = usePatientsStore()
 const { searchQuery, debouncedSearch, setSearch } = useSearchInput(250)
@@ -52,6 +54,10 @@ const isEmpty = computed(
 const isNoResults = computed(
   () => filteredProviders.value.length === 0 && providersStore.items.length > 0,
 )
+
+function onRowClick(event: { data: ProviderRow }): void {
+  router.push(`/providers/${event.data.id}`)
+}
 
 onMounted(async () => {
   await Promise.all([providersStore.load(), patientsStore.load()])
@@ -95,6 +101,7 @@ onMounted(async () => {
       scroll-height="560px"
       responsive-layout="scroll"
       class="provider-table"
+      @row-click="onRowClick"
     >
       <Column field="name" header="Provider Name" />
       <Column field="type" header="Provider Type" />

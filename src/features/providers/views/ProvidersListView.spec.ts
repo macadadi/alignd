@@ -28,7 +28,10 @@ const mockPatient = createMockPatient({
 
 const router = createRouter({
   history: createMemoryHistory(),
-  routes: [{ path: '/providers', component: ProvidersListView }],
+  routes: [
+    { path: '/providers', component: ProvidersListView },
+    { path: '/providers/:id', component: { template: '<div />' } },
+  ],
 })
 
 describe('ProvidersListView', () => {
@@ -99,5 +102,17 @@ describe('ProvidersListView', () => {
     await nextTick()
     await new Promise((r) => setTimeout(r, 300))
     expect(wrapper.text()).toContain('Clinic Alpha')
+  })
+
+  it('navigates to provider on row click', async () => {
+    const pushSpy = vi.spyOn(router, 'push')
+    const wrapper = mount(ProvidersListView, {
+      global: { plugins: [createPinia(), router] },
+    })
+    await nextTick()
+    await new Promise((r) => setTimeout(r, 0))
+    const row = wrapper.find('.p-datatable-tbody tr')
+    if (row.exists()) await row.trigger('click')
+    expect(pushSpy).toHaveBeenCalledWith('/providers/prov-1')
   })
 })
