@@ -1,0 +1,92 @@
+:root {
+  /* Alignd brand-first palette */
+  --brand-primary: #467c45;
+  --brand-primary-strong: #2e5b31;
+  --brand-primary-soft: #dcebdc;
+  --brand-secondary: #2f4f40;
+
+  --neutral-0: #ffffff;
+  --neutral-50: #f6f8f4;
+  --neutral-100: #edf2ea;
+  --neutral-300: #ccd9cc;
+  --neutral-700: #2b3c31;
+  --neutral-900: #1d2a22;
+
+  --status-success: var(--brand-primary);
+  --status-warning: #9a3412;
+  --status-error: #b91c1c;
+
+  /* semantic color variables for this project */
+  --color-primary: var(--brand-primary);
+  --color-secondary: var(--brand-secondary);
+  --color-success: var(--status-success);
+
+  --color-background: var(--neutral-0);
+  --color-background-soft: var(--neutral-50);
+  --color-background-mute: var(--neutral-100);
+  --color-surface: var(--neutral-0);
+
+  --color-border: var(--neutral-300);
+  --color-border-hover: color-mix(in srgb, var(--brand-primary) 28%, var(--neutral-300));
+
+  --color-heading: var(--neutral-900);
+  --color-text: var(--neutral-700);
+  --color-text-muted: color-mix(in srgb, var(--neutral-700) 70%, white);
+  --color-warning: var(--status-warning);
+  --color-error: var(--status-error);
+
+  --section-gap: 160px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #152018;
+    --color-background-soft: #1c2a20;
+    --color-background-mute: #223326;
+    --color-surface: #1c2a20;
+
+    --color-border: color-mix(in srgb, var(--brand-primary) 36%, #1c2a20);
+    --color-border-hover: color-mix(in srgb, var(--brand-primary) 56%, #1c2a20);
+
+    --color-heading: #f2f7ef;
+    --color-text: #d7e6d6;
+    --color-text-muted: #b7cdb6;
+    --color-warning: #f59e0b;
+    --color-error: #f87171;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+  transition:
+    color 0.5s,
+    background-color 0.5s;
+  line-height: 1.6;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 15px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

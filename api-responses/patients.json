@@ -1,0 +1,253 @@
+{
+  "patients": [
+    {
+      "id": "P001",
+      "firstName": "Thabo",
+      "lastName": "Mokoena",
+      "fullName": "Thabo Mokoena",
+      "membershipNumber": "MED-2021-004821",
+      "schemeAdministrator": "Discovery Health",
+      "dependencyCode": "00",
+      "program": {
+        "name": "CareMore Respiratory",
+        "type": "Respiratory",
+        "phase": "Standard Intensive"
+      },
+      "address": {
+        "street": "14 Protea Avenue",
+        "suburb": "Sandton",
+        "city": "Johannesburg",
+        "province": "Gauteng",
+        "postalCode": "2196"
+      },
+      "providerCount": 3,
+      "providers": [
+        { "id": "PR001", "name": "Dr. Naledi Dlamini", "type": "Independent Nurse" },
+        { "id": "PR003", "name": "OxygenCare SA", "type": "Oxygen Supplier" },
+        { "id": "PR005", "name": "BedCom Supplies", "type": "Bed Supplier" }
+      ],
+      "clinicalSummary": [
+        {
+          "id": "CS001",
+          "providerName": "Dr. Naledi Dlamini",
+          "date": "2025-01-15",
+          "comment": "Patient presented with mild dyspnea. Oxygen saturation at 93%. Adjusted bronchodilator dosage. Follow-up scheduled in 2 weeks."
+        },
+        {
+          "id": "CS002",
+          "providerName": "Dr. Naledi Dlamini",
+          "date": "2024-12-10",
+          "comment": "Routine check. Spirometry results stable. Patient reports improved sleep quality since starting CPAP therapy."
+        },
+        {
+          "id": "CS003",
+          "providerName": "OxygenCare SA",
+          "date": "2024-11-22",
+          "comment": "Oxygen concentrator serviced and filter replaced. Patient educated on equipment maintenance and emergency protocols."
+        }
+      ]
+    },
+    {
+      "id": "P002",
+      "firstName": "Zanele",
+      "lastName": "Khumalo",
+      "fullName": "Zanele Khumalo",
+      "membershipNumber": "MED-2019-007734",
+      "schemeAdministrator": "Momentum Health",
+      "dependencyCode": "01",
+      "program": {
+        "name": "HeartPath Cardiovascular",
+        "type": "Cardiovascular",
+        "phase": "Standard Ongoing"
+      },
+      "address": {
+        "street": "7 Baobab Close",
+        "suburb": "Durban North",
+        "city": "Durban",
+        "province": "KwaZulu-Natal",
+        "postalCode": "4051"
+      },
+      "providerCount": 2,
+      "providers": [
+        { "id": "PR002", "name": "Sunrise Hospice KZN", "type": "Hospice" },
+        { "id": "PR004", "name": "Dr. Sipho Ndlovu", "type": "Independent Nurse" }
+      ],
+      "clinicalSummary": [
+        {
+          "id": "CS004",
+          "providerName": "Dr. Sipho Ndlovu",
+          "date": "2025-02-01",
+          "comment": "Blood pressure 138/88. Patient is compliant with medication. Discussed sodium restriction diet. ECG normal."
+        },
+        {
+          "id": "CS005",
+          "providerName": "Sunrise Hospice KZN",
+          "date": "2025-01-05",
+          "comment": "Palliative care review conducted. Pain management protocol adjusted. Family counselling session completed."
+        }
+      ]
+    },
+    {
+      "id": "P003",
+      "firstName": "Pieter",
+      "lastName": "van der Merwe",
+      "fullName": "Pieter van der Merwe",
+      "membershipNumber": "MED-2022-001190",
+      "schemeAdministrator": "Bonitas Medical Fund",
+      "dependencyCode": "00",
+      "program": {
+        "name": "MetaBalance Metabolic",
+        "type": "Metabolic",
+        "phase": "Remote Intensive"
+      },
+      "address": {
+        "street": "22 Jakaranda Street",
+        "suburb": "Centurion",
+        "city": "Pretoria",
+        "province": "Gauteng",
+        "postalCode": "0157"
+      },
+      "providerCount": 1,
+      "providers": [{ "id": "PR006", "name": "Dr. Ayasha Naidoo", "type": "Independent Nurse" }],
+      "clinicalSummary": [
+        {
+          "id": "CS006",
+          "providerName": "Dr. Ayasha Naidoo",
+          "date": "2025-02-10",
+          "comment": "HbA1c at 7.4%, improvement from 8.1% last quarter. Patient adhering to meal plan. Remote monitoring glucose levels consistent."
+        },
+        {
+          "id": "CS007",
+          "providerName": "Dr. Ayasha Naidoo",
+          "date": "2025-01-10",
+          "comment": "Initiated remote intensive monitoring. Wearable glucose device calibrated. Patient educated on digital app usage for daily logging."
+        }
+      ]
+    },
+    {
+      "id": "P004",
+      "firstName": "Lerato",
+      "lastName": "Sithole",
+      "fullName": "Lerato Sithole",
+      "membershipNumber": "MED-2020-009342",
+      "schemeAdministrator": "Discovery Health",
+      "dependencyCode": "02",
+      "program": {
+        "name": "CareMore Respiratory",
+        "type": "Respiratory",
+        "phase": "Standard Ongoing"
+      },
+      "address": {
+        "street": "88 Flame Lily Road",
+        "suburb": "Polokwane",
+        "city": "Polokwane",
+        "province": "Limpopo",
+        "postalCode": "0699"
+      },
+      "providerCount": 4,
+      "providers": [
+        { "id": "PR001", "name": "Dr. Naledi Dlamini", "type": "Independent Nurse" },
+        { "id": "PR003", "name": "OxygenCare SA", "type": "Oxygen Supplier" },
+        { "id": "PR007", "name": "Limpopo Hospice Care", "type": "Hospice" },
+        { "id": "PR008", "name": "MedBed Solutions", "type": "Bed Supplier" }
+      ],
+      "clinicalSummary": [
+        {
+          "id": "CS008",
+          "providerName": "Dr. Naledi Dlamini",
+          "date": "2025-02-14",
+          "comment": "Patient recovering post-exacerbation. Peak flow improved to 320 L/min. Steroid taper commenced. No hospital readmission."
+        },
+        {
+          "id": "CS009",
+          "providerName": "Limpopo Hospice Care",
+          "date": "2025-01-28",
+          "comment": "Home visit conducted. Comfort care measures reviewed with family. Advance care plan documented and signed."
+        },
+        {
+          "id": "CS010",
+          "providerName": "OxygenCare SA",
+          "date": "2025-01-03",
+          "comment": "Backup oxygen cylinder delivered and installed. Checked flow regulator calibration. All safety checks passed."
+        }
+      ]
+    },
+    {
+      "id": "P005",
+      "firstName": "Amahle",
+      "lastName": "Zulu",
+      "fullName": "Amahle Zulu",
+      "membershipNumber": "MED-2023-003581",
+      "schemeAdministrator": "Medihelp",
+      "dependencyCode": "00",
+      "program": {
+        "name": "HeartPath Cardiovascular",
+        "type": "Cardiovascular",
+        "phase": "Standard Intensive"
+      },
+      "address": {
+        "street": "3 Hluhluwe Drive",
+        "suburb": "Umhlanga",
+        "city": "Durban",
+        "province": "KwaZulu-Natal",
+        "postalCode": "4320"
+      },
+      "providerCount": 2,
+      "providers": [
+        { "id": "PR004", "name": "Dr. Sipho Ndlovu", "type": "Independent Nurse" },
+        { "id": "PR009", "name": "CardioMed Supplies", "type": "Bed Supplier" }
+      ],
+      "clinicalSummary": [
+        {
+          "id": "CS011",
+          "providerName": "Dr. Sipho Ndlovu",
+          "date": "2025-02-18",
+          "comment": "Post-MI follow-up. Ejection fraction stable at 48%. Patient started cardiac rehab. Medications reviewed and optimised."
+        }
+      ]
+    },
+    {
+      "id": "P006",
+      "firstName": "Johan",
+      "lastName": "Botha",
+      "fullName": "Johan Botha",
+      "membershipNumber": "MED-2018-005522",
+      "schemeAdministrator": "Bonitas Medical Fund",
+      "dependencyCode": "03",
+      "program": {
+        "name": "MetaBalance Metabolic",
+        "type": "Metabolic",
+        "phase": "Standard Ongoing"
+      },
+      "address": {
+        "street": "45 Voortrekker Road",
+        "suburb": "Bellville",
+        "city": "Cape Town",
+        "province": "Western Cape",
+        "postalCode": "7530"
+      },
+      "providerCount": 1,
+      "providers": [{ "id": "PR010", "name": "Dr. Fatima Hendricks", "type": "Independent Nurse" }],
+      "clinicalSummary": [
+        {
+          "id": "CS012",
+          "providerName": "Dr. Fatima Hendricks",
+          "date": "2025-01-30",
+          "comment": "Annual metabolic panel reviewed. Cholesterol borderline elevated. Added statin therapy. Lifestyle counselling completed."
+        },
+        {
+          "id": "CS013",
+          "providerName": "Dr. Fatima Hendricks",
+          "date": "2024-10-15",
+          "comment": "Patient reports fatigue and weight gain of 4kg over 6 months. Thyroid panel ordered. Diet reassessment conducted."
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "total": 6,
+    "page": 1,
+    "pageSize": 10,
+    "fetchedAt": "2025-02-21T08:00:00Z"
+  }
+}

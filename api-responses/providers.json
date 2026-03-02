@@ -1,0 +1,80 @@
+{
+  "providers": [
+    {
+      "id": "PR001",
+      "name": "Dr. Naledi Dlamini",
+      "type": "Independent Nurse",
+      "patientCount": 2,
+      "patients": ["P001", "P004"]
+    },
+    {
+      "id": "PR002",
+      "name": "Sunrise Hospice KZN",
+      "type": "Hospice",
+      "patientCount": 1,
+      "patients": ["P002"]
+    },
+    {
+      "id": "PR003",
+      "name": "OxygenCare SA",
+      "type": "Oxygen Supplier",
+      "patientCount": 2,
+      "patients": ["P001", "P004"]
+    },
+    {
+      "id": "PR004",
+      "name": "Dr. Sipho Ndlovu",
+      "type": "Independent Nurse",
+      "patientCount": 2,
+      "patients": ["P002", "P005"]
+    },
+    {
+      "id": "PR005",
+      "name": "BedCom Supplies",
+      "type": "Bed Supplier",
+      "patientCount": 1,
+      "patients": ["P001"]
+    },
+    {
+      "id": "PR006",
+      "name": "Dr. Ayasha Naidoo",
+      "type": "Independent Nurse",
+      "patientCount": 1,
+      "patients": ["P003"]
+    },
+    {
+      "id": "PR007",
+      "name": "Limpopo Hospice Care",
+      "type": "Hospice",
+      "patientCount": 1,
+      "patients": ["P004"]
+    },
+    {
+      "id": "PR008",
+      "name": "MedBed Solutions",
+      "type": "Bed Supplier",
+      "patientCount": 1,
+      "patients": ["P004"]
+    },
+    {
+      "id": "PR009",
+      "name": "CardioMed Supplies",
+      "type": "Bed Supplier",
+      "patientCount": 1,
+      "patients": ["P005"]
+    },
+    {
+      "id": "PR010",
+      "name": "Dr. Fatima Hendricks",
+      "type": "Independent Nurse",
+      "patientCount": 1,
+      "patients": ["P006"]
+    }
+  ],
+  "meta": {
+    "total": 10,
+    "page": 1,
+    "pageSize": 10,
+    "fetchedAt": "2025-02-21T08:00:00Z"
+  }
+}
