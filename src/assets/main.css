@@ -78,9 +78,23 @@ a {
 .p-inputtext,
 .p-select,
 .p-checkbox-box {
-  background: var(--color-surface);
-  border-color: var(--color-border);
-  color: var(--color-text);
+  background: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+
+.p-select-label,
+.p-select-dropdown {
+  background: transparent !important;
+  color: var(--color-text) !important;
+}
+
+.p-dropdown,
+.p-dropdown-label,
+.p-dropdown-trigger {
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
 }
 
 .p-inputtext::placeholder {
@@ -101,23 +115,52 @@ a {
 }
 
 .p-select-overlay {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+
+.p-dropdown-panel {
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text) !important;
+}
+
+.p-select-list-container,
+.p-select-list {
+  background: var(--color-surface) !important;
+}
+
+.p-dropdown-items {
+  background: var(--color-surface) !important;
 }
 
 .p-select-option {
-  color: var(--color-text);
+  color: var(--color-text) !important;
+}
+
+.p-dropdown-item {
+  color: var(--color-text) !important;
 }
 
 .p-select-option.p-focus,
 .p-select-option:hover {
-  background: var(--color-background-soft);
+  background: var(--color-background-soft) !important;
+}
+
+.p-dropdown-item.p-focus,
+.p-dropdown-item:hover {
+  background: var(--color-background-soft) !important;
 }
 
 .p-select-option.p-select-option-selected {
-  background: var(--color-background-mute);
-  color: var(--color-heading);
+  background: var(--color-background-mute) !important;
+  color: var(--color-heading) !important;
+}
+
+.p-dropdown-item.p-highlight {
+  background: var(--color-background-mute) !important;
+  color: var(--color-heading) !important;
 }
 
 .p-dialog {
