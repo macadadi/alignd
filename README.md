@@ -1,4 +1,10 @@
-# Alignd Healthcare Dashboard
+# Alignd Healthcare Dash board
+<img width="1133" height="889" alt="Screenshot 2026-03-03 at 12 51 11" src="https://github.com/user-attachments/assets/34bb9fe4-9df2-4e62-b52f-984ce6f95146" />
+
+<img width="1114" height="741" alt="Screenshot 2026-03-03 at 12 50 45" src="https://github.com/user-attachments/assets/7ddc1e3d-457d-48a7-b393-bc66c1c386c0" />
+
+<img width="1102" height="726" alt="Screenshot 2026-03-03 at 12 50 31" src="https://github.com/user-attachments/assets/193ce3fb-fdd5-488a-ac4e-11478d24c36a" />
+
 
 Production-focused Vue 3 + TypeScript dashboard for patient and provider workflows.
 
