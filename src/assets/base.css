@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light;
+
   /* Alignd brand-first palette */
   --brand-primary: #467c45;
   --brand-primary-strong: #2e5b31;
@@ -36,24 +38,6 @@
   --color-error: var(--status-error);
 
   --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #152018;
-    --color-background-soft: #1c2a20;
-    --color-background-mute: #223326;
-    --color-surface: #1c2a20;
-
-    --color-border: color-mix(in srgb, var(--brand-primary) 36%, #1c2a20);
-    --color-border-hover: color-mix(in srgb, var(--brand-primary) 56%, #1c2a20);
-
-    --color-heading: #f2f7ef;
-    --color-text: #d7e6d6;
-    --color-text-muted: #b7cdb6;
-    --color-warning: #f59e0b;
-    --color-error: #f87171;
-  }
 }
 
 *,
