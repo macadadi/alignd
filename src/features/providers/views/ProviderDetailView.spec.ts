@@ -44,7 +44,7 @@ const router = createRouter({
   ],
 })
 
-function mountView(route = '/providers/prov-1') {
+function mountView() {
   return mount(ProviderDetailView, {
     global: {
       plugins: [createPinia(), router],

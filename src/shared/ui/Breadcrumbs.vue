@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ name: 'AppBreadcrumbs' })
+
 import { computed } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import { usePatientsStore } from '@/features/patients/stores/patients'
