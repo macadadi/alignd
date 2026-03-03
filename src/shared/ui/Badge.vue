@@ -27,11 +27,14 @@ const isLink = computed(() => Boolean(props.to))
 
 <style scoped>
 .badge {
+  display: inline-flex;
+  align-items: center;
   border: 1px solid var(--color-border);
   border-radius: 9999px;
   padding: 0.2rem 0.6rem;
   font-size: 0.8rem;
   width: max-content;
+  white-space: nowrap;
 }
 
 .badge--link {

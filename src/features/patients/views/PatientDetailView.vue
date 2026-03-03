@@ -10,6 +10,7 @@ import { useToast } from 'primevue/usetoast'
 import { persistProviderLinks } from '../api/patients'
 import { usePatientsStore } from '../stores/patients'
 import { useProvidersStore } from '@/features/providers/stores/providers'
+import { pluralize } from '@/shared/utils/format'
 
 const LinkProviderModal = defineAsyncComponent(() => import('../components/LinkProviderModal.vue'))
 
@@ -143,14 +144,11 @@ onMounted(async () => {
           <h2>{{ patient.fullName }}</h2>
           <p>{{ patient.id }}</p>
         </div>
-        <div class="view-header__actions">
-          <Button
-            label="Back to patients"
-            severity="secondary"
-            @click="goBackToPatients"
-          />
-          <Button label="Link Provider" @click="openModal" />
-        </div>
+        <Button
+          label="Back to patients"
+          severity="secondary"
+          @click="goBackToPatients"
+        />
       </header>
 
       <article class="panel">
@@ -183,7 +181,7 @@ onMounted(async () => {
           <div>
             <dt>Provider Count</dt>
             <dd>
-              <Badge>{{ patient.providerIds.length }} linked providers</Badge>
+              <Badge>{{ pluralize(patient.providerIds.length, 'linked provider', 'linked providers') }}</Badge>
             </dd>
           </div>
           <div class="details-grid__wide">
@@ -198,7 +196,10 @@ onMounted(async () => {
       </article>
 
       <article class="panel">
-        <h3>Linked providers</h3>
+        <div class="panel-header">
+          <h3>Linked providers</h3>
+          <Button label="Link provider" @click="openModal" />
+        </div>
         <p v-if="linkedProviders.length === 0" class="muted">No linked providers yet.</p>
         <ul v-else class="linked-list">
           <li v-for="provider in linkedProviders" :key="provider.id">
@@ -251,12 +252,6 @@ onMounted(async () => {
   gap: 1rem;
 }
 
-.view-header__actions {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
 @media (max-width: 640px) {
   .view-header {
     flex-direction: column;
@@ -282,6 +277,15 @@ p {
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
   padding: 1rem;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
 }
 
 .details-grid {

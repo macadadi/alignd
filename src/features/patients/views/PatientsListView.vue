@@ -10,6 +10,7 @@ import ListViewShell from '@/shared/ui/ListViewShell.vue'
 import { useSearchInput } from '@/shared/composables/useSearchInput'
 import { usePatientsStore } from '../stores/patients'
 import { filterPatientsByProgramme, filterPatientsBySearch } from '@/shared/utils/filters'
+import { pluralize } from '@/shared/utils/format'
 import type { PatientAddress } from '@/shared/types/domain'
 
 const route = useRoute()
@@ -102,16 +103,8 @@ watch(searchQuery, debouncedSyncSearch)
 watch(selectedProgrammeType, syncFiltersToUrl)
 watch(selectedProgrammePhase, syncFiltersToUrl)
 
-function navigateToPatient(patientId: string): void {
-  router.push({ path: `/patients/${patientId}`, state: { fromListQuery: buildListQuery() } })
-}
-
 function patientDetailTo(patientId: string) {
   return { path: `/patients/${patientId}`, state: { fromListQuery: buildListQuery() } }
-}
-
-function onRowClick(event: { data: PatientRow }): void {
-  navigateToPatient(event.data.id)
 }
 
 onMounted(async () => {
@@ -165,7 +158,6 @@ onMounted(async () => {
       scroll-height="560px"
       responsive-layout="scroll"
       class="patient-table"
-      @row-click="onRowClick"
     >
       <Column field="fullName" header="Full Name" />
       <Column field="membershipNumber" header="Membership Number" />
@@ -175,8 +167,8 @@ onMounted(async () => {
       <Column field="programmePhase" header="Programme Phase" />
       <Column field="providerCount" header="Provider Count">
         <template #body="{ data }">
-          <Badge :to="patientDetailTo(data.id)" @click.stop>
-            {{ data.providerCount }} linked providers
+          <Badge :to="patientDetailTo(data.id)">
+            {{ pluralize(data.providerCount, 'linked provider', 'linked providers') }}
           </Badge>
         </template>
       </Column>
@@ -192,8 +184,12 @@ onMounted(async () => {
   overflow: hidden;
 }
 
-.patient-table :deep(.p-datatable-tbody > tr) {
-  cursor: pointer;
+.patient-table :deep(.p-datatable-tbody > tr:nth-child(even)) {
+  background: var(--color-background-soft);
+}
+
+.patient-table :deep(.p-datatable-tbody > tr:nth-child(odd)) {
+  background: var(--color-background);
 }
 
 @media (max-width: 640px) {

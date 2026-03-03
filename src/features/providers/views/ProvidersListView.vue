@@ -11,6 +11,7 @@ import { useSearchInput } from '@/shared/composables/useSearchInput'
 import { useProvidersStore } from '../stores/providers'
 import { usePatientsStore } from '@/features/patients/stores/patients'
 import { buildProviderPatientCountMap, filterProvidersBySearch, filterProvidersByType } from '@/shared/utils/filters'
+import { pluralize } from '@/shared/utils/format'
 
 const route = useRoute()
 const router = useRouter()
@@ -136,7 +137,7 @@ onMounted(async () => {
       <Column field="type" header="Provider Type" />
       <Column field="patientCount" header="Patient Count">
         <template #body="{ data }">
-          <Badge>{{ data.patientCount }} patients</Badge>
+          <Badge>{{ pluralize(data.patientCount, 'patient', 'patients') }}</Badge>
         </template>
       </Column>
     </DataTable>
@@ -148,5 +149,13 @@ onMounted(async () => {
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
   overflow: hidden;
+}
+
+.provider-table :deep(.p-datatable-tbody > tr:nth-child(even)) {
+  background: var(--color-background-soft);
+}
+
+.provider-table :deep(.p-datatable-tbody > tr:nth-child(odd)) {
+  background: var(--color-background);
 }
 </style>

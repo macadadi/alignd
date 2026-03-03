@@ -81,7 +81,7 @@ describe('ProviderDetailView', () => {
     expect(wrapper.text()).toContain('Dr. Clinic Alpha')
     expect(wrapper.text()).toContain('prov-1')
     expect(wrapper.text()).toContain('Independent Nurse')
-    expect(wrapper.text()).toContain('1 linked patients')
+    expect(wrapper.text()).toContain('1 linked patient')
   })
 
   it('shows error state and retries on Retry click', async () => {

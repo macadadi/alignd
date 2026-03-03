@@ -104,6 +104,7 @@ function confirmSelection(): void {
         scroll-height="320px"
         responsive-layout="stack"
         breakpoint="960px"
+        class="provider-select-table"
       >
         <Column header="" style="width: 64px">
           <template #body="{ data }">
@@ -169,5 +170,13 @@ function confirmSelection(): void {
 .error-message {
   margin: 0;
   color: var(--color-error);
+}
+
+.provider-select-table :deep(.p-datatable-tbody > tr:nth-child(even)) {
+  background: var(--color-background-soft);
+}
+
+.provider-select-table :deep(.p-datatable-tbody > tr:nth-child(odd)) {
+  background: var(--color-background);
 }
 </style>

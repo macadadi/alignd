@@ -115,16 +115,15 @@ describe('PatientsListView', () => {
     expect(phaseDropdown?.props('modelValue')).toBe('Phase1')
   })
 
-  it('navigates to patient on row click', async () => {
-    const pushSpy = vi.spyOn(router, 'push')
+  it('provider count badge links to patient detail', async () => {
     const wrapper = mount(PatientsListView, {
       global: { plugins: [createPinia(), router] },
     })
     await nextTick()
     await new Promise((r) => setTimeout(r, 0))
-    const row = wrapper.find('.p-datatable-tbody tr')
-    if (row.exists()) await row.trigger('click')
-    expect(pushSpy).toHaveBeenCalledWith(
+    const badge = wrapper.findComponent({ name: 'AppBadge' })
+    expect(badge.exists()).toBe(true)
+    expect(badge.props('to')).toEqual(
       expect.objectContaining({ path: '/patients/p1', state: expect.any(Object) }),
     )
   })

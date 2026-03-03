@@ -8,6 +8,7 @@ import StateError from '@/shared/ui/StateError.vue'
 import StateEmpty from '@/shared/ui/StateEmpty.vue'
 import { useProvidersStore } from '../stores/providers'
 import { usePatientsStore } from '@/features/patients/stores/patients'
+import { pluralize } from '@/shared/utils/format'
 
 const route = useRoute()
 const router = useRouter()
@@ -88,7 +89,7 @@ onMounted(async () => {
           <div>
             <dt>Patient Count</dt>
             <dd>
-              <Badge>{{ linkedPatients.length }} linked patients</Badge>
+              <Badge>{{ pluralize(linkedPatients.length, 'linked patient', 'linked patients') }}</Badge>
             </dd>
           </div>
         </dl>
